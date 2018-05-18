@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @project     SocialLogin
+ * @package     LitExtension_SocialLogin
+ * @author      LitExtension
+ * @email       litextension@gmail.com
+ */
+-->
+<config>
+    <modules>
+        <LitExtension_SocialLogin>
+            <version>2.1.4</version>
+        </LitExtension_SocialLogin>
+    </modules>
+
+    <global>
+        <blocks>
+            <le_sociallogin>
+                <class>LitExtension_SocialLogin_Block</class>
+            </le_sociallogin>
+        </blocks>
+
+        <helpers>
+            <le_sociallogin>
+                <class>LitExtension_SocialLogin_Helper</class>
+            </le_sociallogin>
+        </helpers>
+
+        <models>
+            <le_sociallogin>
+                <class>LitExtension_SocialLogin_Model</class>
+            </le_sociallogin>
+        </models>
+
+        <resources>
+            <sociallogin_setup>
+                <setup>
+                    <module>LitExtension_SocialLogin</module>
+                    <class>Mage_Customer_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sociallogin_setup>
+            <le_sociallogin_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </le_sociallogin_write>
+            <le_sociallogin_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </le_sociallogin_read>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <le_sociallogin>
+                <use>standard</use>
+                <args>
+                    <module>LitExtension_SocialLogin</module>
+                    <frontName>le_sociallogin</frontName>
+                </args>
+            </le_sociallogin>
+        </routers>
+
+        <layout>
+            <updates>
+                <le_sociallogin>
+                    <file>le_sociallogin.xml</file>
+                </le_sociallogin>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <LitExtension_SocialLogin>
+                    <files>
+                        <default>LitExtension_SocialLogin.csv</default>
+                    </files>
+                </LitExtension_SocialLogin>
+            </modules>
+        </translate>
+    </frontend>
+
+    <default>
+        <le_sociallogin>
+            <general><showonloginpage>inloginbox</showonloginpage></general>
+            <general><showoncheckout>1</showoncheckout></general>
+            <facebook><enabled>0</enabled></facebook>
+            <google><enabled>0</enabled></google>
+            <twitter><enabled>0</enabled></twitter>
+            <linkedin><enabled>0</enabled></linkedin>
+            <yahoo><enabled>0</enabled></yahoo>
+        </le_sociallogin>
+    </default>
+
+</config>

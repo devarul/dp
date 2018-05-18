@@ -1,0 +1,52 @@
+2018-05-17T22:11:25+00:00 DEBUG (7): Array
+(
+    [category_id] => 3
+    [active_product] => 0
+    [numbers_product] =>  4  
+    [active_static_block_top] => 0
+    [static_block_top] => 
+    [active_static_block] => 0
+    [active_static_block_left] => 0
+    [static_block_left] => 
+    [active_static_block_bottom] => 0
+    [static_block_bottom] => 
+    [active_static_block_right] => 0
+    [static_block_right] => 
+    [active_label] => 0
+    [label] => 
+    [active_thumbail] => 0
+    [level_column_count] => 0
+    [category_children] => 0
+    [width_block_left] =>  164  
+    [width_block_right] =>  199  
+    [width_children] => 0
+    [font-color] => 
+    [background-color] => 
+)
+
+2018-05-17T22:12:17+00:00 DEBUG (7): Array
+(
+    [category_id] => 3
+    [active_product] => 0
+    [numbers_product] =>  4  
+    [active_static_block_top] => 0
+    [static_block_top] => 
+    [active_static_block] => 0
+    [active_static_block_left] => 0
+    [static_block_left] => 
+    [active_static_block_bottom] => 0
+    [static_block_bottom] => 
+    [active_static_block_right] => 0
+    [static_block_right] => 
+    [active_label] => 0
+    [label] => 
+    [active_thumbail] => 0
+    [level_column_count] => 0
+    [category_children] => 0
+    [width_block_left] => 164
+    [width_block_right] => 199
+    [width_children] => 0
+    [font-color] => 
+    [background-color] => 
+)
+

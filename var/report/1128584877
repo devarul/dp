@@ -1,0 +1,18 @@
+a:5:{i:0;s:870:"Error in file: "C:\wamp\www\db\app\code\core\Mage\Customer\sql\customer_setup\upgrade-1.6.2.0.4-1.6.2.0.5.php" - SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'customer_flowpassword' already exists, query was: CREATE TABLE `customer_flowpassword` (
+  `flowpassword_id` int UNSIGNED NOT NULL auto_increment COMMENT 'Flow password Id' ,
+  `ip` varchar(50) NOT NULL COMMENT 'User IP' ,
+  `email` varchar(255) NOT NULL COMMENT 'Requested email for change' ,
+  `requested_date` varchar(255) NOT NULL default '0000-00-00 00:00:00' COMMENT 'Requested date for change' ,
+  PRIMARY KEY (`flowpassword_id`),
+  INDEX `IDX_CUSTOMER_FLOWPASSWORD_EMAIL` (`email`),
+  INDEX `IDX_CUSTOMER_FLOWPASSWORD_IP` (`ip`),
+  INDEX `IDX_CUSTOMER_FLOWPASSWORD_REQUESTED_DATE` (`requested_date`)
+) COMMENT='Customer flow password' ENGINE=INNODB charset=utf8 COLLATE=utf8_general_ci";i:1;s:907:"#0 C:\wamp\www\db\app\code\core\Mage\Core\Model\Resource\Setup.php(644): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 C:\wamp\www\db\app\code\core\Mage\Core\Model\Resource\Setup.php(437): Mage_Core_Model_Resource_Setup->_modifyResourceDb('upgrade', '1.6.2.0.4', '1.6.2.0.6')
+#2 C:\wamp\www\db\app\code\core\Mage\Core\Model\Resource\Setup.php(320): Mage_Core_Model_Resource_Setup->_upgradeResourceDb('1.6.2.0.4', '1.6.2.0.6')
+#3 C:\wamp\www\db\app\code\core\Mage\Core\Model\Resource\Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 C:\wamp\www\db\app\code\core\Mage\Core\Model\App.php(428): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 C:\wamp\www\db\app\code\core\Mage\Core\Model\App.php(354): Mage_Core_Model_App->_initModules()
+#6 C:\wamp\www\db\app\Mage.php(684): Mage_Core_Model_App->run(Array)
+#7 C:\wamp\www\db\index.php(99): Mage::run('partner', 'website')
+#8 {main}";s:3:"url";s:11:"/index.php/";s:11:"script_name";s:10:"/index.php";s:4:"skin";s:7:"default";}

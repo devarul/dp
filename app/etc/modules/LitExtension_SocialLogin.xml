@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+/**
+ * @project     SocialLogin
+ * @package     LitExtension_SocialLogin
+ * @author      LitExtension
+ * @email       litextension@gmail.com
+ */
+-->
+<config>
+    <modules>
+        <LitExtension_SocialLogin>
+            <active>true</active>
+            <codePool>community</codePool>
+        </LitExtension_SocialLogin>
+    </modules>
+</config>

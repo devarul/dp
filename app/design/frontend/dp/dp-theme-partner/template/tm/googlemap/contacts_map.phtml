@@ -1,0 +1,100 @@
+<?php 
+if (Mage::getStoreConfig('googlemap/contacts/active', Mage::app()->getStore())):	
+
+	$tm_googlemap_contacts_settings = array(
+		'api_key' 				=> Mage::getStoreConfig('googlemap/contacts/api_key', Mage::app()->getStore()),
+		'sensor' 				=> Mage::getStoreConfig('googlemap/contacts/sensor', Mage::app()->getStore()),	
+		'zoom' 					=> Mage::getStoreConfig('googlemap/contacts/zoom', Mage::app()->getStore()),	
+		'type' 					=> Mage::getStoreConfig('googlemap/contacts/type', Mage::app()->getStore()),	
+		'styles' 				=> Mage::getStoreConfig('googlemap/contacts/styles', Mage::app()->getStore()),	
+		'coordinates' 			=> Mage::getStoreConfig('googlemap/contacts/coordinates', Mage::app()->getStore()),	
+		'width' 				=> Mage::getStoreConfig('googlemap/contacts/width', Mage::app()->getStore()),	
+		'height' 				=> Mage::getStoreConfig('googlemap/contacts/height', Mage::app()->getStore()),	
+		'ui' 					=> Mage::getStoreConfig('googlemap/contacts/ui', Mage::app()->getStore()),
+		'marker' 				=> Mage::getStoreConfig('googlemap/contacts/marker', Mage::app()->getStore()),	
+		'marker_coordinates' 	=> Mage::getStoreConfig('googlemap/contacts/marker_coordinates', Mage::app()->getStore()),	
+		'marker_title' 			=> Mage::getStoreConfig('googlemap/contacts/marker_title', Mage::app()->getStore()),	
+		'marker_image' 			=> Mage::getStoreConfig('googlemap/contacts/marker_image', Mage::app()->getStore()),	
+		'infowindow' 			=> Mage::getStoreConfig('googlemap/contacts/infowindow', Mage::app()->getStore()),	
+		);
+	?>
+
+	<div class="block-contacts-googlemap">	    
+		<div class="block-content">
+			<div id="map_canvas" style="width:<?php echo $tm_googlemap_contacts_settings['width']; ?>; height:<?php echo $tm_googlemap_contacts_settings['height']; ?>"></div>
+	    </div>
+	</div>
+
+	<script type="text/javascript">
+
+		jQuery(document).ready(function(){
+			jQuery('.block-contacts-googlemap').insertBefore('.contact-block');
+		})
+
+		function tm_googlemap_contacts_initialize() {
+			var mapOptions = {
+				zoom: <?php echo $tm_googlemap_contacts_settings['zoom']; ?>,
+				center: new google.maps.LatLng(<?php echo $tm_googlemap_contacts_settings['coordinates']; ?>),
+				mapTypeId: google.maps.MapTypeId.<?php echo $tm_googlemap_contacts_settings['type']; ?>,
+				scrollwheel: false ,
+				<?php if (strlen($tm_googlemap_contacts_settings['styles']) > 0) { ?>
+					styles: <?php echo $tm_googlemap_contacts_settings['styles']; ?>,
+				<?php }; ?>
+				disableDefaultUI: <?php echo $tm_googlemap_contacts_settings['ui']; ?>
+			}
+			var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+			<?php if ($tm_googlemap_contacts_settings['marker']): ?>
+
+				<?php if (strlen($tm_googlemap_contacts_settings['marker_image']) > 0):
+					$marker_image = $this->getSkinUrl('images/' . $tm_googlemap_contacts_settings['marker_image'], array('_secure'=>true)); ?>
+
+					var image = {
+					    url: "<?php echo $marker_image; ?>"
+					    // // This marker is 20 pixels wide by 32 pixels tall.
+					    // size: new google.maps.Size(20, 32),
+					    // // The origin for this image is 0,0.
+					    // origin: new google.maps.Point(0,0),
+					    // // The anchor for this image is the base of the flagpole at 0,32.
+					    // anchor: new google.maps.Point(0, 32)
+					  };
+
+				<?php endif; ?>
+
+				
+				// Marker settings
+				var markerLatlng = new google.maps.LatLng(<?php echo $tm_googlemap_contacts_settings['marker_coordinates']; ?>);
+
+				var marker = new google.maps.Marker({
+					position: markerLatlng,
+					title: "<?php echo $tm_googlemap_contacts_settings['marker_title']; ?>"
+					<?php if (strlen($tm_googlemap_contacts_settings['marker_image']) > 0) { ?>
+					,	icon: image
+					<?php }; ?>					
+				});
+
+				var contentString = "<?php echo $tm_googlemap_contacts_settings['infowindow']; ?>";
+
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map,marker);
+				});
+
+				marker.setMap(map);
+			<?php endif; ?>
+		}
+
+		function tm_googlemap_contacts_loadScript() {
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			script.src = "http://maps.googleapis.com/maps/api/js?v=3.9&key=<?php echo $tm_googlemap_contacts_settings['api_key']; ?>&sensor=<?php echo $tm_googlemap_contacts_settings['sensor']; ?>&callback=tm_googlemap_contacts_initialize";
+			document.body.appendChild(script);
+		}
+
+		window.onload = tm_googlemap_contacts_loadScript;
+	</script>
+
+<?php endif; ?>

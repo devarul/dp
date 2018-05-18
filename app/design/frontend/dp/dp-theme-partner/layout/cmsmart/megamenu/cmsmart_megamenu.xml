@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+        <reference name="top.menu" >
+	  		  <action  method="unsetChild" ><name>catalog.topnav</name></action>
+	  		  <block type="page/html_topmenu" name="catalog.topnav2" template="page/html/topmenu_2.phtml"/>
+               <block type="megamenu/navigation"  name="catalog.topnav.megamenu">
+	              <action method="unsetData"><key>cache_lifetime</key></action>
+	              <action method="unsetData"><key>cache_tags</key></action>
+          	   </block>
+        </reference>
+        
+    </default>
+</layout> 

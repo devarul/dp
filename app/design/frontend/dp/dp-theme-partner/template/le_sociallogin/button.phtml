@@ -1,0 +1,44 @@
+<?php
+/**
+ * @project     SocialLogin
+ * @package     LitExtension_SocialLogin
+ * @author      LitExtension
+ * @email       litextension@gmail.com
+ */
+?>
+<?php
+$check_show_social = Mage::helper('le_sociallogin')->checkShowSociallogin();
+if($check_show_social == true && Mage::getSingleton('customer/session')->IsLoggedIn() == false):
+?>
+    <link type="text/css" rel="stylesheet" media="screen" href="<?php echo $this->getSkinUrl('le_sociallogin/css/style.css');?>"/>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('le_sociallogin/js/sociallogin.js');?>"></script>
+    <div class="le-socialconnect-social">
+        <div class="account-login">
+            <div class="col3-set">
+                <div class="col-3 le-login-facebook">
+                    <div class="content le-center">
+                        <h2><?php echo $this->__('social connect')?></h2>
+                        <p><?php echo $this->__('You can login using your social network account.') ?></p>
+                        <div class="le-social-button-login">
+                            <?php
+                             if($this->getButtons()){
+                                foreach($this->getButtons() as $button){
+                                    echo $button->render();
+                                }
+                             }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    if(Mage::getSingleton('core/design_package')->getTheme('frontend') == 'iphone') { ?>
+    <style type="text/css">
+        .le-social-button-login .le-icon-social{
+            float: left;
+        }
+    </style>
+    <?php } ?>
+<?php endif;?>

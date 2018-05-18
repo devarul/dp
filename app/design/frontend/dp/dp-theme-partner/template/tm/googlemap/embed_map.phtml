@@ -1,0 +1,101 @@
+<?php 
+if (Mage::getStoreConfig('googlemap/embed/active', Mage::app()->getStore())):	
+
+	$tm_googlemap_embed_settings = array(
+		'api_key' 				=> Mage::getStoreConfig('googlemap/embed/api_key', Mage::app()->getStore()),
+		'sensor' 				=> Mage::getStoreConfig('googlemap/embed/sensor', Mage::app()->getStore()),	
+		'zoom' 					=> Mage::getStoreConfig('googlemap/embed/zoom', Mage::app()->getStore()),	
+		'type' 					=> Mage::getStoreConfig('googlemap/embed/type', Mage::app()->getStore()),	
+		'styles' 				=> Mage::getStoreConfig('googlemap/embed/styles', Mage::app()->getStore()),	
+		'coordinates' 			=> Mage::getStoreConfig('googlemap/embed/coordinates', Mage::app()->getStore()),	
+		'width' 				=> Mage::getStoreConfig('googlemap/embed/width', Mage::app()->getStore()),	
+		'height' 				=> Mage::getStoreConfig('googlemap/embed/height', Mage::app()->getStore()),	
+		'ui' 					=> Mage::getStoreConfig('googlemap/embed/ui', Mage::app()->getStore()),	
+		'scrollwheel' 			=> Mage::getStoreConfig('googlemap/embed/scrollwheel', Mage::app()->getStore()),	
+		'draggable' 			=> Mage::getStoreConfig('googlemap/embed/draggable', Mage::app()->getStore()),	
+		'marker' 				=> Mage::getStoreConfig('googlemap/embed/marker', Mage::app()->getStore()),	
+		'marker_coordinates' 	=> Mage::getStoreConfig('googlemap/embed/marker_coordinates', Mage::app()->getStore()),	
+		'marker_title' 			=> Mage::getStoreConfig('googlemap/embed/marker_title', Mage::app()->getStore()),	
+		'marker_image' 			=> Mage::getStoreConfig('googlemap/embed/marker_image', Mage::app()->getStore()),	
+		'infowindow' 			=> Mage::getStoreConfig('googlemap/embed/infowindow', Mage::app()->getStore()),	
+		); ?>
+
+	<div class="block-embed-googlemap" style="height:<?php echo $tm_googlemap_embed_settings['height']; ?>">	    
+		<div class="block-content">
+			<div id="map_canvas_embed" style="width:<?php echo $tm_googlemap_embed_settings['width']; ?>; height:<?php echo $tm_googlemap_embed_settings['height']; ?>"></div>
+	    </div>
+	</div>
+
+	<script type="text/javascript">
+		function tm_googlemap_embed_initialize() {
+			var mapOptions = {
+				zoom: <?php echo $tm_googlemap_embed_settings['zoom']; ?>,
+				center: new google.maps.LatLng(<?php echo $tm_googlemap_embed_settings['coordinates']; ?>),
+				mapTypeId: google.maps.MapTypeId.<?php echo $tm_googlemap_embed_settings['type']; ?>,
+				<?php if (strlen($tm_googlemap_embed_settings['styles']) > 0) { ?>
+					styles: <?php echo $tm_googlemap_embed_settings['styles']; ?>,
+				<?php }; ?>
+				disableDefaultUI: <?php echo $tm_googlemap_embed_settings['ui']; ?>,
+				scrollwheel: <?php echo $tm_googlemap_embed_settings['scrollwheel']; ?>,
+			    draggable: <?php echo $tm_googlemap_embed_settings['draggable']; ?>
+			}
+			var map = new google.maps.Map(document.getElementById("map_canvas_embed"), mapOptions);
+
+			<?php if ($tm_googlemap_embed_settings['marker']): ?>
+
+				<?php if (strlen($tm_googlemap_embed_settings['marker_image']) > 0):
+					$marker_image = $this->getSkinUrl('images/' . $tm_googlemap_embed_settings['marker_image'], array('_secure'=>true)); ?>
+
+					var image = {
+					    url: "<?php echo $marker_image; ?>"
+					    // // This marker is 20 pixels wide by 32 pixels tall.
+					    // size: new google.maps.Size(20, 32),
+					    // // The origin for this image is 0,0.
+					    // origin: new google.maps.Point(0,0),
+					    // // The anchor for this image is the base of the flagpole at 0,32.
+					    // anchor: new google.maps.Point(0, 32)
+					  };
+
+				<?php endif; ?>
+
+				// Marker settings
+				var markerLatlng = new google.maps.LatLng(<?php echo $tm_googlemap_embed_settings['marker_coordinates']; ?>);
+
+				var marker = new google.maps.Marker({
+					position: markerLatlng,
+					title: "<?php echo $tm_googlemap_embed_settings['marker_title']; ?>"
+					<?php if (strlen($tm_googlemap_embed_settings['marker_image']) > 0) { ?>
+					,	icon: image
+					<?php }; ?>	
+				});
+
+				var contentString = "<?php echo $tm_googlemap_embed_settings['infowindow']; ?>";
+
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map,marker);
+				});
+
+				marker.setMap(map);
+			<?php endif; ?>
+		}
+
+		function tm_googlemap_embed_loadScript() {
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			script.src = "http://maps.googleapis.com/maps/api/js?v=3.9&key=<?php echo $tm_googlemap_embed_settings['api_key']; ?>&sensor=<?php echo $tm_googlemap_embed_settings['sensor']; ?>&callback=tm_googlemap_embed_initialize";
+			document.body.appendChild(script);
+		}
+
+		window.onload = tm_googlemap_embed_loadScript;
+
+		jQuery(document).ready(function(){
+			jQuery('.footer-container').addClass('map-enabled');
+		})
+
+	</script>
+
+<?php endif; ?>

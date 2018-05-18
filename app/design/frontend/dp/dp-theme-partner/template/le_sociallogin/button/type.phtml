@@ -1,0 +1,37 @@
+<?php
+/**
+ * @project     SocialLogin
+ * @package     LitExtension_SocialLogin
+ * @author      LitExtension
+ * @email       litextension@gmail.com
+ */
+?>
+<?php
+$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+$block = new LitExtension_SocialLogin_Block_Button();
+if (Mage::getStoreConfig('le_sociallogin/general/showonloginpage') == 'inloginbox') {
+    $pos = strpos($currentUrl,'customer/account/login');
+    if($pos !== false) {
+        if ($this->checkEnable() == true):?>
+            <a onclick="showLESocialPopup('<?php echo $this->_getButtonUrl(); ?>', <?php echo $this->getWidth(); ?>, <?php echo $this->getHeight(); ?>);">
+                <div class="<?php echo $this->getClass(); ?> le-icon-social"
+                     title="<?php echo $this->__('Connect with ') . $this->__($this->getTitle()); ?>"></div>
+            </a>
+        <?php endif;
+    } else {
+        if ($this->checkEnable() == true):?>
+            <button class="<?php echo $this->getClass(); ?> le-icon-social"
+                    title="<?php echo $this->__('Connect with ') . $this->__($this->getTitle()); ?>"
+                    onclick="showLESocialPopup('<?php echo $this->_getButtonUrl(); ?>', <?php echo $this->getWidth(); ?>, <?php echo $this->getHeight(); ?>);"></button>
+        <?php endif;
+    }
+
+} else {
+    if ($this->checkEnable() == true):?>
+        <button class="<?php echo $this->getClass(); ?> le-icon-social"
+                title="<?php echo $this->__('Connect with ') . $this->__($this->getTitle()); ?>"
+                onclick="showLESocialPopup('<?php echo $this->_getButtonUrl(); ?>', <?php echo $this->getWidth(); ?>, <?php echo $this->getHeight(); ?>);"><?php echo $this->getNameico(); ?></button>
+    <?php endif;
+}
+?>
+

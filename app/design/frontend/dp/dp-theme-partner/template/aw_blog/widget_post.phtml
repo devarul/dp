@@ -1,0 +1,56 @@
+<?php if ($posts = $this->getRecent()): ?>
+
+    <div style="position:relative; z-index:2;">
+    <div class="blog-bg" data-source-url="<?php echo $this->getSkinUrl('') ?>images/bg_video.jpg">
+     <div class="container">
+      <div class="row">
+       <div class="col-xs-12">
+        <div class="blog_index_block">
+        
+         <div class="page-title category-title center">
+             <h1><?php echo Mage::helper('blog')->__('Latest Posts');  ?></h1>
+         </div>
+         <ul class="blog_intex_posts">
+             <?php $i = 0; ?>
+             <?php foreach ($posts as $post): ?>
+                 <?php if ($i<3): ?>
+                     <li class="post_index_col<?php if ($i == 2) { echo " last"; } ?>">
+                         <div class="widget-latest-details">
+                             <div class="post_date_index">
+																														<span class="day_post"><?php echo $currentDate = date('d', strtotime($post->getCreatedTime())); ?></span>
+																														<span class="month_post"><?php echo $currentDate = date('F', strtotime($post->getCreatedTime())); ?></span>
+                             </div>
+                             <!--
+                             <a class="widget-latest-comment" href="<?php echo $post->getAddress(); ?>#commentBox" >
+                              <i class="fa fa-comment-o"></i>
+                              <?php if ($post->getCommentCount() > 0): ?>
+                                  <?php echo $post->getCommentCount(); ?> <?php echo Mage::helper('blog')->__('Comments'); ?>
+                              <?php endif; ?>
+                               <?php if ($post->getCommentCount() < 1): ?> 
+                                  <?php echo "0"; ?> <?php echo Mage::helper('blog')->__('Comments'); ?>
+                              <?php endif; ?>
+                             </a>
+                             <span class="postDetails-user">
+                              <i class="fa fa-user"></i>
+                              <?php echo $post->getUser(); ?>
+                             </span>
+                             -->
+                         </div>
+                         <div class="postContent"><?php echo Mage::helper('cms')->getBlockTemplateProcessor()->filter($post->getShortContent()); ?></div>
+                         <div class="widget-latest-title"><a href="<?php echo $post->getAddress(); ?>" ><span><?php echo $post->getTitle(); ?></span></a></div>                         
+                         <!--<a href="<?php echo $post->getAddress(); ?>"class="aw-blog-read-more all-blog"><?php echo Mage::helper('blog')->__('Read more');  ?></a>-->
+                     </li>
+                 <?php endif; ?>
+                 <?php $i++; ?>
+             <?php endforeach; ?>
+         </ul>
+         <!-- <a href="<?php // echo $this->getBlogUrl() ?>"class="aw-blog-read-more all-blog"><?php // echo Mage::helper('blog')->__('View all posts');  ?></a> -->
+        
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    </div>
+<?php endif; ?>
+<?php // $tt = count($this->getRecent()); print_r($tt) ; ?>

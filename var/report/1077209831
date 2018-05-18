@@ -1,0 +1,20 @@
+a:5:{i:0;s:105:"Invalid method Mage_Page_Block_Template_Links::removeLinkByName(Array
+(
+    [0] => checkout_cart_link
+)
+)";i:1;s:1811:"#0 [internal function]: Varien_Object->__call('removeLinkByNam...', Array)
+#1 [internal function]: Mage_Page_Block_Template_Links->removeLinkByName('checkout_cart_l...')
+#2 C:\wamp\www\db\app\code\core\Mage\Core\Model\Layout.php(348): call_user_func_array(Array, Array)
+#3 C:\wamp\www\db\app\code\core\Mage\Core\Model\Layout.php(214): Mage_Core_Model_Layout->_generateAction(Object(Mage_Core_Model_Layout_Element), Object(Mage_Core_Model_Layout_Element))
+#4 C:\wamp\www\db\app\code\core\Mage\Core\Model\Layout.php(210): Mage_Core_Model_Layout->generateBlocks(Object(Mage_Core_Model_Layout_Element))
+#5 C:\wamp\www\db\app\code\core\Mage\Core\Controller\Varien\Action.php(344): Mage_Core_Model_Layout->generateBlocks()
+#6 C:\wamp\www\db\app\code\core\Mage\Cms\Helper\Page.php(113): Mage_Core_Controller_Varien_Action->generateLayoutBlocks()
+#7 C:\wamp\www\db\app\code\core\Mage\Cms\Helper\Page.php(52): Mage_Cms_Helper_Page->_renderPage(Object(Mage_Cms_IndexController), 'home')
+#8 C:\wamp\www\db\app\code\core\Mage\Cms\controllers\IndexController.php(45): Mage_Cms_Helper_Page->renderPage(Object(Mage_Cms_IndexController), 'home')
+#9 C:\wamp\www\db\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Mage_Cms_IndexController->indexAction()
+#10 C:\wamp\www\db\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#11 C:\wamp\www\db\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#12 C:\wamp\www\db\app\code\core\Mage\Core\Model\App.php(365): Mage_Core_Controller_Varien_Front->dispatch()
+#13 C:\wamp\www\db\app\Mage.php(684): Mage_Core_Model_App->run(Array)
+#14 C:\wamp\www\db\index.php(99): Mage::run('cust', 'website')
+#15 {main}";s:3:"url";s:11:"/index.php/";s:11:"script_name";s:10:"/index.php";s:4:"skin";s:7:"cust_en";}

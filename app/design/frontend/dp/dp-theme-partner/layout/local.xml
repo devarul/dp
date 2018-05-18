@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="top.links">
+            <remove name="checkout_cart_link" />
+        </reference>
+        <reference name="header">
+            <remove name="top.search" />
+            <remove name="cart_header" />
+       </reference>
+    </default>
+</layout>

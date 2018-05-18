@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_system_config_edit>
+    	<reference name="head">
+    		<action method="addJs"><script>cmsmart/ajaxsearch/jquery-1.10.2.min.js</script></action>
+            <action method="addJs"><script>cmsmart/ajaxsearch/jquery-noconflict.js</script></action>
+    		<action method="addJs"><script>cmsmart/ajaxsearch/colorpicker.js</script></action>
+    	</reference>
+    </adminhtml_system_config_edit>
+</layout>

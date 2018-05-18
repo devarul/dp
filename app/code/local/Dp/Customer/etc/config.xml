@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Dp_Customer>
+            <version>1.0.0</version>
+        </Dp_Customer>
+    </modules>
+    <global>
+        <helpers>
+            <dp_customer>
+                <class>Dp_Customer_Helper</class>
+            </dp_customer>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <dp_customer>
+                    <file>dp_customer.xml</file>
+                </dp_customer>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Dp_Customer>
+                    <files>
+                        <default>Dp_Customer.csv</default>
+                    </files>
+                </Dp_Customer>
+            </modules>
+        </translate>
+    </frontend>
+</config>

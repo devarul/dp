@@ -1,0 +1,60 @@
+<?php 
+if (Mage::getStoreConfig('newsletterpopup/general/active', Mage::app()->getStore())):?>
+	
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newsletterpopup" aria-hidden="true" id="newsletterpopup">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" class="fa fa-times"></span><span class="sr-only">Close</span></button>
+				<div class="modal-body">
+					<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+						<div class="block-content">
+							<h2><?php echo $this->__('Newsletter') ?></h2>
+       <p>Subscribe to the men’s store mailing list to receive updates on new arrivals offers and other discount information.</p>
+       <div class="form-group">
+								<input type="text" name="email" id="newsletter" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" />
+							</div>
+							<div class="actions">
+								<button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="button" name="newsletter_submit"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php 
+	//var_dump(Mage::getSingleton('core/session'));
+
+	// Script init for home page only
+	if(Mage::getSingleton('cms/page')->getIdentifier() == 'home' && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms') : ?>
+		<script type="text/javascript">
+			//<![CDATA[
+				var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+			//]]>			
+		</script>		
+
+		<?php 
+		// Popup init conditions
+		if (Mage::getSingleton('core/session')->getSignedUpForNewsletter() == false) { ?>
+			<script>
+				jQuery(document).ready(function() {
+					var newsPopup 		= jQuery('#newsletterpopup');
+					var newsPopupClose 	= newsPopup.find('.close');
+					var showNewsPopup 	= localStorage.getItem("showNewsPopup");
+
+					if (showNewsPopup != '0') {
+						newsPopup.modal();
+					};					
+
+					newsPopupClose.click(function(){
+						localStorage.setItem("showNewsPopup", '0');
+					});
+
+					console.log(showNewsPopup);
+					console.log(typeof(showNewsPopup));
+				});
+			</script>
+		<?php } ?>
+	<?php endif; ?>
+<?php endif; ?>
